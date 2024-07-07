@@ -1,0 +1,5 @@
+package com.mifarmaUtp.app.repository;
+
+public interface UserRepository {
+
+}

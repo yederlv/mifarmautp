@@ -1,0 +1,5 @@
+package com.mifarmaUtp.app.controller;
+
+public class AuthController {
+
+}

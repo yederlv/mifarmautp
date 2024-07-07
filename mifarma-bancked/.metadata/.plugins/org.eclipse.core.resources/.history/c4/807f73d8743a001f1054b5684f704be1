@@ -1,0 +1,5 @@
+package com.mifarmaUtp.app.entity;
+
+public class User {
+
+}
