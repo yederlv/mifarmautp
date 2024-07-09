@@ -1,5 +1,11 @@
 .boletas-list-container {
     padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
   .filter-buttons {
@@ -13,11 +19,16 @@
     border: 1px solid #000;
     background-color: #fff;
     cursor: pointer;
+    transition: background-color 0.3s;
   }
   
   .filter-buttons button.active {
-    /*background-color: #00ffff;*/
     background-color: #009929; /* Color verde claro */
+  }
+  
+  .filter-buttons button:not(.active):hover {
+    /*background-color: #e0e0e0;*/
+    background-color: #5ccb5f;
   }
   
   .boletas-table {
@@ -33,10 +44,27 @@
     text-align: left;
   }
   
+  .boletas-table th {
+    background-color: #f1f1f1;
+  }
+  
   .submit-button {
     padding: 10px 20px;
     border: 1px solid #000;
-    background-color: #fff;
+    /*background-color: #fff;*/
+    background-color: #009929; /* Color verde claro */
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-button:hover {
+    /*background-color: #e0e0e0;*/
+    background-color: #5ccb5f;
+  }
+  
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
     cursor: pointer;
   }
   
