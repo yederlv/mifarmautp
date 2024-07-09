@@ -60,3 +60,8 @@
     background-color: #218838;
   }
   
+  .error-message {
+    color: red;
+    margin-top: 20px;
+  }
+  
