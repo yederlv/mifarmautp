@@ -1,0 +1,45 @@
+.send-boleta-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-group button {
+    padding: 10px 20px;
+    border: 1px solid #000;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .form-group button:hover {
+    background-color: #5ccb5f;
+  }
+  
+  .form-group button[type="button"] {
+    margin-left: 10px;
+  }
+  

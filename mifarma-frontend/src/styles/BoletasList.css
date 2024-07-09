@@ -51,8 +51,8 @@
   .submit-button {
     padding: 10px 20px;
     border: 1px solid #000;
-    /*background-color: #fff;*/
-    background-color: #009929; /* Color verde claro */
+    background-color: #fff;
+    /*background-color: #009929; */
     cursor: pointer;
     transition: background-color 0.3s;
   }

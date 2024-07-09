@@ -3,13 +3,13 @@ import '../../styles/BoletasList.css';
 
 const BoletasList = () => {
   const [filter, setFilter] = useState('all');
-  const boletas = [
+  const [boletas, setBoletas] = useState([
     { codigo: 'B00000000001', tipo: 'RR HH', estado: 'Pendiente', fecha: '27-05-2024', seleccionado: false },
     { codigo: 'B00000000002', tipo: 'Contabilidad', estado: 'Pendiente', fecha: '27-05-2024', seleccionado: false },
     { codigo: 'B00000000003', tipo: 'Contabilidad', estado: 'Enviado', fecha: '27-05-2024', seleccionado: true },
     { codigo: 'B00000000004', tipo: 'Contabilidad', estado: 'Enviado', fecha: '27-05-2024', seleccionado: true },
     { codigo: 'B00000000005', tipo: 'Contabilidad', estado: 'Nuevo', fecha: '28-05-2024', seleccionado: false },
-  ];
+  ]);
 
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
@@ -23,7 +23,7 @@ const BoletasList = () => {
   const handleCheckboxChange = (index) => {
     const newBoletas = [...boletas];
     newBoletas[index].seleccionado = !newBoletas[index].seleccionado;
-    // Actualiza el estado de las boletas si se requiere
+    setBoletas(newBoletas);
   };
 
   return (
@@ -70,17 +70,19 @@ const BoletasList = () => {
 export default BoletasList;*/
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/BoletasList.css';
 
 const BoletasList = () => {
   const [filter, setFilter] = useState('all');
-  const boletas = [
+  const [boletas, setBoletas] = useState([
     { codigo: 'B00000000001', tipo: 'RR HH', estado: 'Pendiente', fecha: '27-05-2024', seleccionado: false },
     { codigo: 'B00000000002', tipo: 'Contabilidad', estado: 'Pendiente', fecha: '27-05-2024', seleccionado: false },
     { codigo: 'B00000000003', tipo: 'Contabilidad', estado: 'Enviado', fecha: '27-05-2024', seleccionado: true },
     { codigo: 'B00000000004', tipo: 'Contabilidad', estado: 'Enviado', fecha: '27-05-2024', seleccionado: true },
     { codigo: 'B00000000005', tipo: 'Contabilidad', estado: 'Nuevo', fecha: '28-05-2024', seleccionado: false },
-  ];
+  ]);
+  const navigate = useNavigate();
 
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
@@ -94,7 +96,12 @@ const BoletasList = () => {
   const handleCheckboxChange = (index) => {
     const newBoletas = [...boletas];
     newBoletas[index].seleccionado = !newBoletas[index].seleccionado;
-    // Actualiza el estado de las boletas si se requiere
+    setBoletas(newBoletas);
+  };
+
+  const handleSendClick = () => {
+    const selectedBoletas = boletas.filter(boleta => boleta.seleccionado).map(boleta => boleta.codigo);
+    navigate('/send-boletas', { state: { selectedBoletas } });
   };
 
   return (
@@ -133,9 +140,11 @@ const BoletasList = () => {
           ))}
         </tbody>
       </table>
-      <button className="submit-button">Enviar</button>
+      <button className="submit-button" onClick={handleSendClick}>Enviar</button>
     </div>
   );
 };
 
 export default BoletasList;
+
+
