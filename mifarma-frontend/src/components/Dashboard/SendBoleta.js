@@ -1,31 +1,43 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/SendBoleta.css';
 
 const areaOptions = {
   contabilidad: ['Caribel Osco', 'Jose Perez'],
   proyecto: ['Yeder Laura', 'Alfredo Quesquen'],
   marketing: ['Mariella Lombardi'],
-  RRHH: ['Flor Carillo Porras', 'Marcela Quispe Pachas', 'Yaela Moscosa Paredes']
+  rrhh: ['Flor Carillo Porras', 'Marcela Quispe Pachas', 'Yaela Moscosa Paredes']
 };
 
 const SendBoleta = ({ selectedBoletas }) => {
   const [selectedArea, setSelectedArea] = useState('');
-  const [selectedPerson, setSelectedPerson] = useState('');
+  const [selectedPersons, setSelectedPersons] = useState([]);
   const [message, setMessage] = useState('');
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleAreaChange = (event) => {
     setSelectedArea(event.target.value);
-    setSelectedPerson('');
+    setSelectedPersons([]);
   };
 
   const handlePersonChange = (event) => {
-    setSelectedPerson(event.target.value);
+    const selectedOptions = Array.from(event.target.selectedOptions, option => option.value);
+    setSelectedPersons(selectedOptions);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Aquí puedes agregar la lógica para enviar las boletas
-    console.log('Boletas enviadas:', selectedBoletas, selectedArea, selectedPerson, message);
+    console.log('Boletas enviadas:', selectedBoletas, selectedArea, selectedPersons, message);
+    setIsPopupVisible(true);
+    setTimeout(() => {
+      setIsPopupVisible(false);
+    }, 2000);
+  };
+
+  const handleCancel = () => {
+    navigate('/boletas');
   };
 
   return (
@@ -52,8 +64,7 @@ const SendBoleta = ({ selectedBoletas }) => {
         </div>
         <div className="form-group">
           <label>Enviar a:</label>
-          <select value={selectedPerson} onChange={handlePersonChange} disabled={!selectedArea}>
-            <option value="">Selecciona una persona</option>
+          <select multiple value={selectedPersons} onChange={handlePersonChange} disabled={!selectedArea}>
             {selectedArea &&
               areaOptions[selectedArea].map((person) => (
                 <option key={person} value={person}>
@@ -63,6 +74,14 @@ const SendBoleta = ({ selectedBoletas }) => {
           </select>
         </div>
         <div className="form-group">
+          <label>Usuarios seleccionados:</label>
+          <input 
+            type="text" 
+            value={selectedPersons.join(', ')} 
+            readOnly 
+          />
+        </div>
+        <div className="form-group">
           <label>Mensaje:</label>
           <textarea 
             value={message} 
@@ -70,11 +89,16 @@ const SendBoleta = ({ selectedBoletas }) => {
             rows="4" 
           />
         </div>
-        <div className="form-group">
-          <button type="submit">Enviar</button>
-          <button type="button" onClick={() => console.log('Cancelar')}>Cancelar</button>
+        <div className="form-group buttons">
+          <button type="submit" className="btn btn-primary">Enviar</button>
+          <button type="button" className="btn btn-secondary" onClick={handleCancel}>Cancelar</button>
         </div>
       </form>
+      {isPopupVisible && (
+        <div className="popup">
+          <p>Correo enviado</p>
+        </div>
+      )}
     </div>
   );
 };
